@@ -20,21 +20,21 @@ class PhotosController < ApplicationController
     matching_photos = Photo.where({ :id => the_id})
     the_photo = matching_photos.at(0)
     the_photo.destroy
-  #render({ :template => "photo_templates/delete_photo.html.erb"})
+    #render({ :template => "photo_templates/delete_photo.html.erb"})
     redirect_to("/photos")
   end
 
   def add_photo
     #Parameters: {"query_image"=>"https://media.thetot.com/wp-content/uploads/2019/03/18133538/LITTLELIGHTSROBOTLAMPNAVYBLUERED.jpg", "query_caption"=>"Hello world!", "query_owner_id"=>"117"}
 
-  input_image = params.fetch("query_image")
-  input_caption = params.fetch("query_caption")
-  input_owner_id = params.fetch("query_owner_id")
+    input_image = params.fetch("query_image")
+    input_caption = params.fetch("query_caption")
+    input_owner_id = params.fetch("query_owner_id")
 
-  new_photo = Photo.new
-  new_photo.image = input_image
-  new_photo.caption = input_caption
-  new_photo.owner_id = input_owner_id
+    new_photo = Photo.new
+    new_photo.image = input_image
+    new_photo.caption = input_caption
+    new_photo.owner_id = input_owner_id
 
   new_photo.save
 
@@ -45,7 +45,7 @@ class PhotosController < ApplicationController
   def photo_update
     #Parameters: {"query_image"=>"https://media.thetot.com/wp-content/uploads/2019/03/18133538/LITTLELIGHTSROBOTLAMPNAVYBLUERED.jpg", "query_caption"=>"954", "modify_id"=>"954"}
 
-    the_id = params.fetch("modified_id")
+    the_id = params.fetch("modify_id")
     matching_photos = Photo.where({ :id => the_id})
     the_photo = matching_photos.at(0)
     
@@ -63,6 +63,6 @@ class PhotosController < ApplicationController
 
     next_url = "/photos/" + the_photo.id.to_s
     redirect_to(next_url)
-
   end
+
 end

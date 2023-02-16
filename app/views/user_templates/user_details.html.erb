@@ -5,10 +5,10 @@
   <dd><%= @the_user.id %></dd>
 
   <dt>Edit a user</dt>
-  <form action="/insert_user_record">
+  <form action="/update_user/<%= @the_user.username %>">
     <label for="browser_username">Username</label>
-    <input id="browser_username" type="text" name="input_username" placeholder="Enter a username...">
-    <button>Add user</button>
+    <input id="browser_username" type="text" name="query_username" placeholder=" <%= @the_user.username %>">
+    <button>Update user</button>
   </form>
 </dl>
 

@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
 # layout("wrapper.html.erb")
 
+  def homepage
+    redirect_to("/users")
+  end
+
   def index
     matching_users = User.all
     @list_of_users = matching_users.order({:username => :asc})
@@ -19,6 +23,35 @@ class UsersController < ApplicationController
     #else
       render({ :template => "user_templates/user_details.html.erb" })
     #end
+  end
+
+  def add_username
+    #Parameters: {"query_username"=>"anne"}
+
+    input_username = params.fetch("query_username")
+    new_user = User.new
+    new_user.username = input_username
+    new_user.save
+    
+    redirect_to("/users/" + new_user.username.to_s)
+   #render({ :template => "user_templates/add_user.html.erb" })
+  end
+
+  def update_username
+   
+    username = params.fetch("modify_username")
+    matching_username = User.where( :username => "username")
+    the_username = matching_username.at(0)
+  
+    input_username = params.fetch("query_username")
+    the_username = input_username
+    
+    the_username.save
+
+    redirect_to("/users/" + the_username.to_s) 
+
+    #render({ :template => "user_templates/update_user.html.erb" })
+ 
   end
 
 end
