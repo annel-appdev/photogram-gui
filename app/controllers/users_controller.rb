@@ -38,20 +38,19 @@ class UsersController < ApplicationController
   end
 
   def update_username
-   
-    username = params.fetch("modify_username")
-    matching_username = User.where( :username => "username")
+    #Parameters: {"query_username"=>"anne", "modify_username"=>"chi"}
+
+    a_username = params.fetch("modify_username")
+    matching_username = User.where({:username => a_username})
     the_username = matching_username.at(0)
   
     input_username = params.fetch("query_username")
-    the_username = input_username
+    the_username.username = input_username
     
     the_username.save
 
-    redirect_to("/users/" + the_username.to_s) 
+    redirect_to("/users/" + the_username.username.to_s) 
 
-    #render({ :template => "user_templates/update_user.html.erb" })
- 
+    #render({ :template => "user_templates/add_user.html.erb" })
   end
-
 end
